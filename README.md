@@ -9,5 +9,7 @@ npx react-native run-ios
 #API
 
 cd instalura-api
+
 yarn
+
 npm start
