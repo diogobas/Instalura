@@ -1,45 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { useState, useEffect } from 'react';
+import {  ScrollView, FlatList, SafeAreaView } from 'react-native';
+import { Header } from './src/components/Header';
+import { Photo } from './src/components/Photo';
+import { Comments } from './src/components/Comments';
+import obterInformacoes from './src/api/feed';
+import style from './App.style';
 
-import React from 'react';
-import { Text, Image, ScrollView, Dimensions, StyleSheet, FlatList } from 'react-native';
-const informacoes = [{
-  usuario: "Diogo",
-}, {
-  usuario: "Debora",
-}, {
-  usuario: "Dominique",
-}, {
-  usuario: "Elias",
-}]
-
-const largura = Dimensions.get("screen").width;
 const App = () => {
+  const [informacoes, setInformacoes] = useState([]);
+
+  useEffect(() => {
+    obterInformacoes(setInformacoes);
+  }, []);
+
   return (
-    <ScrollView>
-      <FlatList
-        data={informacoes}
-        renderItem={({item}) => (
-          <>
-            <Text>{item.usuario}</Text>
-            <Image source={require("./res/img/alura.jpg")} style={style.image} />
-          </>
-        )}
-      />
-    </ScrollView>
+    <SafeAreaView style={style.container}>
+      <ScrollView>
+        <FlatList
+          data={informacoes}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({item}) => (
+            <>
+              <Header userName={item.userName} urlImage={item.userURL} />
+              <Photo urlPhoto={item.url} description={item.description} qtdLikes={item.likes} />
+              <Comments comments={item.comentarios} />
+            </>
+          )}
+        />
+      </ScrollView>
+    </SafeAreaView>
   );
 };
-
-const style = StyleSheet.create({
-  image: {
-    width: largura, 
-    height: largura
-  }
-});
 
 export default App;
