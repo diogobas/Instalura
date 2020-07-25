@@ -17,7 +17,7 @@ const Login = ({ navigation }) => {
 
       // await AsyncStorage.getItem('instalura_token');
 
-      navigation.push('Feed');
+      navigation.replace('Feed', { user });
     } catch (error) {
       setErrorMessage(error.message);
     }

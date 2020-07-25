@@ -19,7 +19,16 @@ const App = () => {
             headerShown: Boolean(Platform.OS === 'ios')
           }}
         />
-        <Stack.Screen name="Feed" component={Feed} />
+        <Stack.Screen
+          name="Feed"
+          component={Feed}
+          options={({ route }) => {
+            return { 
+              title: route.params.user,
+              headerShown: Boolean(Platform.OS === 'ios')
+            };
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
