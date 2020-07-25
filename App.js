@@ -1,34 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import {  ScrollView, FlatList, SafeAreaView } from 'react-native';
-import { Header } from './src/components/Header';
-import { Photo } from './src/components/Photo';
-import { Comments } from './src/components/Comments';
-import obterInformacoes from './src/api/feed';
-import style from './App.style';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Feed from './src/Components/Views/Feed/Feed';
+import Login from './src/Components/Views/Login/Login';
+
+const Stack = createStackNavigator();
 
 const App = () => {
-  const [informacoes, setInformacoes] = useState([]);
-
-  useEffect(() => {
-    obterInformacoes(setInformacoes);
-  }, []);
-
   return (
-    <SafeAreaView style={style.container}>
-      <ScrollView>
-        <FlatList
-          data={informacoes}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({item}) => (
-            <>
-              <Header userName={item.userName} urlImage={item.userURL} />
-              <Photo urlPhoto={item.url} description={item.description} qtdLikes={item.likes} />
-              <Comments comments={item.comentarios} />
-            </>
-          )}
-        />
-      </ScrollView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Feed" component={Feed} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

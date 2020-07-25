@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { Text, FlatList, TextInput, Image, View, TouchableOpacity } from 'react-native';
 import style from './style';
 
-const Comments = ({ comments }) => {
+const Comments = ({ comments, addComment }) => {
     const [stateComments, setComments] = useState(comments);
 
-
-    const addComment = () => {
+    const comment = () => {
       inputField.clear();
 
-      const newComment = {
-        date: Date.now(),
-        text: contentComment,
-        userName: "Tcholas"
-      }
+      const newComment = addComment(
+        contentComment,
+        "Tcholas"
+      );
 
       setComments([...stateComments, newComment]);
     };
@@ -40,7 +38,7 @@ const Comments = ({ comments }) => {
               style={style.container}
               onChangeText={text => contentComment = text}
             />
-            <TouchableOpacity onPress={addComment}>
+            <TouchableOpacity onPress={comment}>
               <Image
                 source={require("../../../res/img/send.png")}
                 style={style.imgSend}

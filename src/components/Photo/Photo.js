@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import style from './style';
-import { likePhoto, imgLike } from '../../api/likes';
 
-const Photo = ({ urlPhoto, description, qtdLikes }) => {
+const Photo = ({ 
+  urlPhoto,
+  description,
+  qtdLikes,
+  likePhoto,
+  imgLike 
+}) => {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(qtdLikes);
 
