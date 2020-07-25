@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, TextInput, Button, Text, Platform } from 'react-native';
 import style from './Login.style';
 import logIn from '../../../api/login';
 
